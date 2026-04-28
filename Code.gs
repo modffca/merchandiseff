@@ -96,9 +96,42 @@ function sheetToObjects(sheet) {
 // MERCHANDISE FUNCTIONS
 // =============================================
 function getMerchandise() {
+  const sheet = getSheet(SHEET_MERCH); 
+  const rawData = sheetToObjects(sheet);
+
+  // Menerjemahkan nama kolom Sheets ke format yang dikenali frontend (HTML)
+  const mappedData = rawData.map(row => {
+    
+    // Opsional: Gabungkan info size ke dalam note jika ingin ditampilkan
+    let sizeInfo = "";
+    if (row['S'] || row['M'] || row['L'] || row['XL'] || row['XXL']) {
+      sizeInfo = `(S:${row['S']||0}, M:${row['M']||0}, L:${row['L']||0}, XL:${row['XL']||0}, XXL:${row['XXL']||0})`;
+    }
+    
+    let finalNote = row['NOTE'] || '';
+    if (sizeInfo) finalNote = sizeInfo + " " + finalNote;
+
+    return {
+      id: row['Id'] || '',
+      foto_url: row['Link foto'] || '',
+      nama: row['Nama Barang'] || '',
+      jenis: row['Kategori'] || '',
+      qty: row['Total'] || 0,
+      note: finalNote,
+      last_update: row['Last Update'] || ''
+    };
+  });
+
+  return { success: true, data: mappedData };
+}
+
+function getJenis() {
   const sheet = getSheet(SHEET_MERCH);
-  const items = sheetToObjects(sheet);
-  return { success: true, data: items };
+  const rawData = sheetToObjects(sheet);
+  
+  // Mengambil list Kategori untuk dropdown filter di web
+  const jenisUnik = [...new Set(rawData.map(i => i['Kategori']).filter(Boolean))];
+  return { success: true, data: jenisUnik };
 }
 
 function getJenis() {
