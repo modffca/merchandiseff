@@ -1,8 +1,9 @@
-// api/proxy.js — Vercel Serverless Function (CommonJS format)
+// api/proxy.js
 
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbye8KOyKjzVmqTeEJWENdcfemRSNDPIcho1JzX02Gh2_lQhgmL4JnLbAuHLfg_udAT5/exec';
 
 module.exports = async function handler(req, res) {
+  // CORS Headers sudah di-handle oleh vercel.json, tapi kita tambahkan di sini untuk keamanan ganda
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
