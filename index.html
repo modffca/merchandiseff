@@ -667,7 +667,7 @@
   // =============================================
   // CONFIG — ganti URL setelah deploy Apps Script
   // =============================================
-  const API_URL = 'https://script.google.com/macros/s/AKfycbye8KOyKjzVmqTeEJWENdcfemRSNDPIcho1JzX02Gh2_lQhgmL4JnLbAuHLfg_udAT5/exec';
+  const API_URL = '/api/proxy';
 
   // =============================================
   // STATE
@@ -953,17 +953,25 @@
   // =============================================
   async function apiGet(action) {
     const url = `${API_URL}?action=${action}`;
-    const res = await fetch(url);
-    return res.json();
+    const res = await fetch(url, { redirect: 'follow' });
+    const text = await res.text();
+    try { return JSON.parse(text); }
+    catch { throw new Error('Response bukan JSON: ' + text.substring(0, 100)); }
   }
 
   async function apiPost(body) {
+    // Apps Script tidak support CORS preflight (OPTIONS).
+    // Kirim sebagai plain text agar tidak trigger preflight,
+    // tapi Apps Script tetap bisa JSON.parse isinya.
     const res = await fetch(API_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      redirect: 'follow',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(body)
     });
-    return res.json();
+    const text = await res.text();
+    try { return JSON.parse(text); }
+    catch { throw new Error('Response bukan JSON: ' + text.substring(0, 100)); }
   }
 
   // =============================================
