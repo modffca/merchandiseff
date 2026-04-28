@@ -1,7 +1,7 @@
 // api/proxy.js — Vercel Serverless Function
 // Proxies requests to Google Apps Script to avoid CORS issues
 
-const APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbye8KOyKjzVmqTeEJWENdcfemRSNDPIcho1JzX02Gh2_lQhgmL4JnLbAuHLfg_udAT5/exec';
 
 export default async function handler(req, res) {
   // Allow all origins (safe because we control the Apps Script)
