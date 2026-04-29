@@ -73,39 +73,59 @@
     .search-box input { width: 100%; padding: 14px 0; border: none; outline: none; background: transparent; font-family: var(--font-body); font-size: 15px; font-weight: 600; }
     .filter-select, .sort-select { padding: 0 16px; background: var(--surface); border: 2px solid var(--text); height: 50px; font-family: var(--font-head); font-weight: 800; text-transform: uppercase; font-size: 13px; outline: none; cursor: pointer; box-shadow: 3px 3px 0px var(--border); }
 
-    /* GRID */
+    /* GRID & CARDS */
     .merch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
     .merch-card { background: var(--surface); border: 2px solid var(--text); display: flex; flex-direction: column; transition: all 0.2s ease; box-shadow: var(--shadow); position: relative; }
     .merch-card:hover { transform: translateY(-4px) translate(-4px, -4px); box-shadow: var(--shadow-hover); }
     .merch-img { width: 100%; aspect-ratio: 1 / 1; background: var(--surface2); border-bottom: 2px solid var(--text); position: relative; }
     .merch-img img { width: 100%; height: 100%; object-fit: cover; }
+    .merch-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 40px; color: var(--border2); }
     .merch-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
     .merch-name { font-family: var(--font-head); font-size: 18px; font-weight: 800; text-transform: uppercase; margin-bottom: auto; padding-bottom: 16px; line-height: 1.2; }
     .merch-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 2px dashed var(--border2); }
     .merch-stock { display: flex; align-items: center; gap: 6px; font-family: var(--font-head); font-size: 13px; font-weight: 800; background: var(--bg); padding: 4px 10px; border: 1px solid var(--text); }
     .merch-stock .dot { width: 8px; height: 8px; border: 1px solid var(--text); }
     .stock-ok .dot { background: var(--success); } .stock-low .dot { background: var(--warning); } .stock-empty .dot { background: var(--danger); }
+    .merch-note { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .admin-actions { display: flex; gap: 8px; margin-top: 16px; padding-top: 16px; border-top: 2px dashed var(--border2); }
 
     /* MODAL */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26, 17, 20, 0.6); backdrop-filter: blur(4px); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s; }
-    .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: 90%; max-width: 550px; background: var(--surface); border: 2px solid var(--text); box-shadow: 8px 8px 0px var(--border2); z-index: 1001; padding: 30px; display: none; opacity: 0; transition: all 0.3s; max-height: 90vh; overflow-y: auto; }
+    .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: 90%; max-width: 600px; background: var(--surface); border: 2px solid var(--text); box-shadow: 8px 8px 0px var(--border2); z-index: 1001; padding: 30px; display: none; opacity: 0; transition: all 0.3s; max-height: 90vh; overflow-y: auto; }
     .modal.active, .modal-overlay.active { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
     .modal-header h3 { font-family: var(--font-head); font-size: 22px; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px dashed var(--border2); padding-bottom: 10px;}
 
-    /* CHECKLIST REQUEST */
-    .req-item-row { border: 2px solid var(--text); padding: 12px; margin-bottom: 10px; background: var(--bg); }
-    .req-item-row.active { border-color: var(--accent); background: var(--surface); }
+    /* CUSTOM REQUEST ITEMS (NEW UI) */
+    .req-item-card { display: flex; align-items: center; gap: 15px; border: 2px solid var(--text); padding: 10px; margin-bottom: 12px; background: var(--surface); transition: 0.2s; cursor: pointer; }
+    .req-item-card:hover { transform: translateY(-2px); box-shadow: 4px 4px 0px var(--border); }
+    .req-item-card.active { border-color: var(--accent); background: var(--bg); box-shadow: 4px 4px 0px var(--border2); }
+    .req-item-img { width: 70px; height: 70px; border: 2px solid var(--text); object-fit: cover; background: var(--surface2); flex-shrink: 0;}
+    .req-item-info { flex: 1; }
+    .req-item-name { font-family: var(--font-head); font-weight: 800; text-transform: uppercase; font-size: 15px; margin-bottom: 4px;}
+    .req-item-stock { font-size: 12px; color: var(--text-muted); font-weight: 600; display:flex; gap:6px; flex-wrap:wrap;}
+    .req-inputs { display: none; margin-top: 12px; padding-top: 12px; border-top: 2px dashed var(--border2); cursor: default; }
+    .req-item-card.active .req-inputs { display: block; }
+    .req-checkbox { width: 22px; height: 22px; cursor: pointer; accent-color: var(--accent); margin-right: 5px; }
+    
+    .size-badge { background: var(--surface2); padding: 2px 6px; border: 1px solid var(--text); font-size: 10px; color: var(--text); }
+    .preview-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed var(--border); font-size: 14px;}
+    .preview-item:last-child { border-bottom: none; }
 
     /* ADMIN REQUEST CARDS */
     .req-card { border: 2px solid var(--text); padding: 20px; background: var(--surface); box-shadow: var(--shadow); margin-bottom: 20px;}
     .req-badge { padding: 4px 10px; font-family: var(--font-head); font-weight: 800; font-size: 12px; border: 2px solid var(--text); display: inline-block; margin-bottom:10px;}
     .badge-pending { background: var(--warning); } .badge-approved { background: var(--success); } .badge-rejected { background: var(--danger); color: white;}
 
-    /* TOAST */
+    /* STATES & TOAST */
+    .empty-state { grid-column: 1 / -1; text-align: center; padding: 60px 20px; border: 2px dashed var(--text); background: var(--surface); }
+    .empty-state h3 { font-family: var(--font-head); font-size: 20px; text-transform: uppercase; margin-bottom: 8px; }
+    .loading-grid .skeleton { background: var(--surface); border: 2px solid var(--border2); height: 380px; animation: pulse 1.5s infinite alternate; }
+    @keyframes pulse { from { opacity: 0.6; } to { opacity: 1; background: var(--surface2); } }
     #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
     .toast { padding: 16px 24px; background: var(--surface); border: 2px solid var(--text); font-family: var(--font-head); font-weight: 800; font-size: 13px; text-transform: uppercase; box-shadow: 4px 4px 0px var(--text); display: flex; align-items: center; gap: 12px; animation: slideIn 0.3s ease; }
     @keyframes slideIn { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: none; } }
+    .toast.success { border-color: var(--success); }
+    .toast.error { border-color: var(--danger); color: var(--danger); }
   </style>
 </head>
 <body>
@@ -145,17 +165,25 @@
   <div class="page" id="page-dashboard">
     <div class="dashboard-page">
       <div class="hero">
-        <h1>Merchandise Free Fire</h1>
+        <h1>Merchandise Free Fire Lantai 23</h1>
         <div class="hero-stats">
           <div class="stat-chip"><div class="val" id="stat-total">—</div><div class="lbl">TOTAL ITEM</div></div>
+          <div class="stat-chip"><div class="val" id="stat-available">—</div><div class="lbl">TERSEDIA</div></div>
         </div>
       </div>
       <div class="toolbar" id="main-toolbar">
         <div class="search-box"><input type="text" id="search-input" placeholder="CARI MERCHANDISE..." oninput="applyFilters()" /></div>
         <select class="filter-select" id="filter-jenis" onchange="applyFilters()"><option value="">SEMUA JENIS</option></select>
+        <select class="sort-select" id="sort-by" onchange="applyFilters()">
+          <option value="newest">TERBARU</option><option value="name-asc">NAMA A–Z</option><option value="name-desc">NAMA Z–A</option><option value="stock-asc">STOK SEDIKIT</option><option value="stock-desc">STOK BANYAK</option>
+        </select>
         <button class="btn btn-primary" onclick="openRequestModal()">+ BUAT REQUEST</button>
       </div>
-      <div class="merch-grid" id="merch-grid"></div>
+      
+      <!-- INI YANG KEMARIN HILANG (RESTORED) -->
+      <div class="loading-grid merch-grid" id="loading-state"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
+      <div class="merch-grid" id="merch-grid" style="display:none"></div>
+
     </div>
   </div>
 
@@ -201,18 +229,39 @@
 
 <!-- MODAL BUAT REQUEST (USER) -->
 <div class="modal" id="modal-request">
-  <div class="modal-header"><h3>Form Request Barang</h3></div>
-  <div class="modal-body">
-    <div class="form-group"><label class="form-label">Nama Peminta</label><input class="form-input" id="req-nama-user" readonly style="background:#eee"></div>
-    <div class="form-group"><label class="form-label">No. Telepon</label><input class="form-input" id="req-telp-user" readonly style="background:#eee"></div>
-    <div class="form-group"><label class="form-label">Keperluan</label><input class="form-input" id="req-keperluan" placeholder="Untuk event apa?"></div>
+  <div class="modal-header"><h3 id="modal-req-title">Form Request Barang</h3></div>
+  
+  <!-- STEP 1: FORM -->
+  <div id="req-step-1">
+    <div style="display:flex; gap:10px;">
+      <div class="form-group" style="flex:1"><label class="form-label">Nama</label><input class="form-input" id="req-nama-user" readonly style="background:#eee"></div>
+      <div class="form-group" style="flex:1"><label class="form-label">No. Telepon</label><input class="form-input" id="req-telp-user" readonly style="background:#eee"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Keperluan</label><input class="form-input" id="req-keperluan" placeholder="Misal: Event Booyah Day, Giveaway, dll"></div>
     
-    <label class="form-label" style="margin-top:20px;">Ceklis Barang Yang Diambil</label>
-    <div id="request-items-list" style="max-height: 250px; overflow-y: auto; border:2px solid var(--text); padding:10px;"></div>
+    <label class="form-label" style="margin-top:20px;">Pilih Barang Yang Ingin Diambil</label>
+    <div id="request-items-list" style="max-height: 280px; overflow-y: auto; padding-right:5px;"></div>
+    
+    <div style="display:flex;gap:10px;margin-top:24px;">
+       <button class="btn btn-ghost" onclick="closeModal()" style="flex:1;">BATAL</button>
+       <button class="btn btn-primary" onclick="previewRequest()" style="flex:1;">LANJUTKAN</button>
+    </div>
   </div>
-  <div style="display:flex;gap:10px;margin-top:24px;">
-     <button class="btn btn-ghost" onclick="closeModal()" style="flex:1;">BATAL</button>
-     <button class="btn btn-primary" onclick="submitRequest()" id="btn-submit-req" style="flex:1;">KIRIM REQUEST</button>
+
+  <!-- STEP 2: PREVIEW -->
+  <div id="req-step-2" style="display:none;">
+    <div style="background:var(--bg); padding:15px; border:2px dashed var(--text); margin-bottom:20px;">
+      <p style="font-size:12px;color:var(--text-muted);font-weight:700;">KEPERLUAN EVENT:</p>
+      <h4 id="prev-keperluan" style="font-family:var(--font-head);text-transform:uppercase;font-size:18px;"></h4>
+    </div>
+    <p style="font-size:13px;color:var(--text);font-weight:700;margin-bottom:10px;">BARANG YANG AKAN DIAMBIL:</p>
+    <div id="prev-items-list" style="border:2px solid var(--text); padding:10px 15px; max-height:220px; overflow-y:auto; background:var(--surface);">
+      <!-- list of items -->
+    </div>
+    <div style="display:flex;gap:10px;margin-top:24px;">
+       <button class="btn btn-ghost" onclick="backToStep1()" style="flex:1;">KEMBALI</button>
+       <button class="btn btn-success" onclick="submitRequest()" id="btn-submit-req" style="flex:1;">KIRIM REQUEST SEKARANG</button>
+    </div>
   </div>
 </div>
 
@@ -220,7 +269,7 @@
 
 <script>
   const API_URL = 'https://script.google.com/macros/s/AKfycbye8KOyKjzVmqTeEJWENdcfemRSNDPIcho1JzX02Gh2_lQhgmL4JnLbAuHLfg_udAT5/exec';
-  let currentUser = null; let allMerchandise = []; let selectedRequestItems = {};
+  let currentUser = null; let allMerchandise = []; let selectedRequestItems = {}; let finalRequestItems = [];
 
   document.addEventListener('DOMContentLoaded', () => {
     const saved = localStorage.getItem('merch_user');
@@ -273,15 +322,29 @@
 
   function handleLogout() { currentUser = null; localStorage.clear(); showPage('auth'); }
 
+  // === PERBAIKAN: DASHBOARD LOAD MERCHANDISE ===
   async function loadMerchandise() {
-    const res = await apiGet('getMerchandise');
-    if(res.success) { 
-      allMerchandise = res.data; populateJenisFilter(); updateStats(); applyFilters(); 
-      let btn = document.getElementById('btn-add-merch');
-      if (currentUser && currentUser.role === 'admin') {
-        if (!btn) { btn = document.createElement('button'); btn.id = 'btn-add-merch'; btn.className = 'btn btn-primary'; btn.innerHTML = '+ TAMBAH ITEM'; btn.onclick = () => openModal(); document.getElementById('main-toolbar').appendChild(btn); }
-      } else if(btn) btn.remove();
+    document.getElementById('loading-state').style.display = 'grid';
+    document.getElementById('merch-grid').style.display    = 'none';
+    
+    try {
+      const res = await apiGet('getMerchandise');
+      if(res.success) { 
+        allMerchandise = res.data; populateJenisFilter(); updateStats(); applyFilters(); 
+        let btn = document.getElementById('btn-add-merch');
+        if (currentUser && currentUser.role === 'admin') {
+          if (!btn) { btn = document.createElement('button'); btn.id = 'btn-add-merch'; btn.className = 'btn btn-primary'; btn.innerHTML = '+ TAMBAH ITEM'; btn.onclick = () => openModal(); document.getElementById('main-toolbar').appendChild(btn); }
+        } else if(btn) btn.remove();
+      } else {
+        showToast('Gagal memuat data', 'error');
+      }
+    } catch(e) {
+      showToast('Koneksi ke API gagal', 'error');
     }
+    
+    // Matikan loading, nyalakan grid
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('merch-grid').style.display    = 'grid';
   }
 
   function populateJenisFilter() {
@@ -290,21 +353,36 @@
     jenis.forEach(j => { const opt = document.createElement('option'); opt.value = j; opt.textContent = j; sel.appendChild(opt); });
   }
 
-  function updateStats() { document.getElementById('stat-total').textContent = allMerchandise.length; }
+  function updateStats() { 
+    document.getElementById('stat-total').textContent = allMerchandise.length; 
+    document.getElementById('stat-available').textContent = allMerchandise.filter(i => parseInt(i.qty) > 0).length;
+  }
 
   function applyFilters() {
     const q = document.getElementById('search-input').value.toLowerCase(); const jenis = document.getElementById('filter-jenis').value; const sortBy = document.getElementById('sort-by').value;
     let filtered = allMerchandise.filter(m => (!q || m.nama.toLowerCase().includes(q) || m.jenis.toLowerCase().includes(q)) && (!jenis || m.jenis === jenis));
-    filtered.sort((a,b) => sortBy==='name-asc' ? a.nama.localeCompare(b.nama) : sortBy==='stock-asc' ? a.qty-b.qty : b.qty-a.qty);
+    
+    filtered.sort((a,b) => {
+      if(sortBy === 'name-asc') return a.nama.localeCompare(b.nama);
+      if(sortBy === 'name-desc') return b.nama.localeCompare(a.nama);
+      if(sortBy === 'stock-asc') return a.qty - b.qty;
+      if(sortBy === 'stock-desc') return b.qty - a.qty;
+      return new Date(b.last_update || 0) - new Date(a.last_update || 0);
+    });
+
     const grid = document.getElementById('merch-grid');
+    if (filtered.length === 0) { grid.innerHTML = `<div class="empty-state"><h3>KOSONG</h3><p>Tidak ada merchandise yang cocok.</p></div>`; return; }
+
     grid.innerHTML = filtered.map(item => `
       <div class="merch-card">
-        <div class="merch-img">${item.foto_url ? `<img src="${item.foto_url}">` : `<div class="merch-img-placeholder">📦</div>`}</div>
+        <div class="merch-img">${item.foto_url ? `<img src="${item.foto_url}" loading="lazy">` : `<div class="merch-img-placeholder">📦</div>`}</div>
         <div class="merch-body">
           <div class="merch-name">${item.nama}</div>
-          <div class="merch-stock ${item.qty==0?'stock-empty':'stock-ok'}"><div class="dot"></div>${item.qty} unit</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; border-top:2px dashed var(--border2); padding-top:16px;">
+            <div class="merch-stock ${item.qty==0?'stock-empty':item.qty<=5?'stock-low':'stock-ok'}"><div class="dot"></div>${item.qty} unit</div>
+          </div>
           ${item.note ? `<div class="merch-note">${item.note}</div>` : ''}
-          ${currentUser?.role === 'admin' ? `<div class="admin-actions"><button class="btn btn-ghost btn-sm" onclick="openModal('${item.id}')">EDIT</button><button class="btn btn-danger btn-sm" onclick="deleteMerch('${item.id}')">HAPUS</button></div>` : ''}
+          ${currentUser?.role === 'admin' ? `<div class="admin-actions"><button class="btn btn-ghost btn-sm" style="flex:1" onclick="openModal('${item.id}')">EDIT</button><button class="btn btn-danger btn-sm" style="flex:1" onclick="deleteMerch('${item.id}')">HAPUS</button></div>` : ''}
         </div>
       </div>
     `).join('');
@@ -318,10 +396,12 @@
   function openModal(id = null) {
     document.getElementById('modal-overlay').classList.add('active'); document.getElementById('modal-form').classList.add('active');
     if (id) {
-      const i = allMerchandise.find(x => x.id == id);
+      document.getElementById('modal-title').textContent = 'EDIT ITEM';
+      const i = allMerchandise.find(x => String(x.id) === String(id));
       document.getElementById('form-id').value = i.id; document.getElementById('form-nama').value = i.nama; document.getElementById('form-jenis').value = i.jenis; document.getElementById('form-qty').value = i.qty; document.getElementById('form-foto').value = i.foto_url; document.getElementById('form-note').value = i.raw_note || '';
       document.getElementById('form-s').value = i.s||''; document.getElementById('form-m').value = i.m||''; document.getElementById('form-l').value = i.l||''; document.getElementById('form-xl').value = i.xl||''; document.getElementById('form-xxl').value = i.xxl||'';
     } else {
+      document.getElementById('modal-title').textContent = 'TAMBAH ITEM';
       document.querySelectorAll('#modal-form input').forEach(inp => inp.value = ''); document.getElementById('form-qty').value = '0';
     }
   }
@@ -337,39 +417,73 @@
     document.getElementById('btn-save-merch').textContent = 'SIMPAN';
   }
 
-  async function deleteMerch(id) { if(confirm('Hapus?')) { const res = await apiPost({action:'deleteMerchandise', id}); if(res.success) loadMerchandise(); } }
+  async function deleteMerch(id) { if(confirm('Hapus?')) { const res = await apiPost({action:'deleteMerchandise', id}); if(res.success) {showToast('Berhasil Hapus', 'success'); loadMerchandise();} } }
 
-  // === FITUR REQUEST BARANG ===
+  // === FITUR REQUEST BARANG (NEW UI) ===
   function openRequestModal() {
     selectedRequestItems = {};
-    document.getElementById('req-nama-user').value = currentUser.nama; document.getElementById('req-telp-user').value = currentUser.no_telp || 'Tidak ada no. telp'; document.getElementById('req-keperluan').value = '';
+    document.getElementById('req-nama-user').value = currentUser.nama; 
+    document.getElementById('req-telp-user').value = currentUser.no_telp || 'Tidak ada no. telp'; 
+    document.getElementById('req-keperluan').value = '';
     
     let html = '';
+    // Hanya tampilkan barang yang stoknya lebih dari 0
     allMerchandise.filter(m => parseInt(m.qty) > 0).forEach(m => {
       const hasSize = (m.s || m.m || m.l || m.xl || m.xxl);
+      const imgHtml = m.foto_url ? `<img src="${m.foto_url}" class="req-item-img">` : `<div class="req-item-img" style="display:flex;align-items:center;justify-content:center;font-size:24px;">📦</div>`;
+      
+      let sizeBadges = '';
+      if(m.s) sizeBadges += `<span class="size-badge">S:${m.s}</span>`;
+      if(m.m) sizeBadges += `<span class="size-badge">M:${m.m}</span>`;
+      if(m.l) sizeBadges += `<span class="size-badge">L:${m.l}</span>`;
+      if(m.xl) sizeBadges += `<span class="size-badge">XL:${m.xl}</span>`;
+      if(m.xxl) sizeBadges += `<span class="size-badge">XXL:${m.xxl}</span>`;
+
       html += `
-        <div class="req-item-row" id="req-row-${m.id}">
-          <label style="display:flex; gap:10px; font-weight:700;"><input type="checkbox" onchange="toggleReqItem('${m.id}', this.checked)"> ${m.nama} (Stok: ${m.qty})</label>
-          <div id="req-inputs-${m.id}" style="display:none; margin-top:10px;">
-            ${hasSize ? `<div style="display:flex;gap:5px;margin-bottom:5px;">
-              ${m.s?`<input type="number" min="0" max="${m.s}" placeholder="S" class="form-input req-s" data-id="${m.id}" oninput="calcReqQty('${m.id}')" style="padding:5px">`:''}
-              ${m.m?`<input type="number" min="0" max="${m.m}" placeholder="M" class="form-input req-m" data-id="${m.id}" oninput="calcReqQty('${m.id}')" style="padding:5px">`:''}
-              ${m.l?`<input type="number" min="0" max="${m.l}" placeholder="L" class="form-input req-l" data-id="${m.id}" oninput="calcReqQty('${m.id}')" style="padding:5px">`:''}
-              ${m.xl?`<input type="number" min="0" max="${m.xl}" placeholder="XL" class="form-input req-xl" data-id="${m.id}" oninput="calcReqQty('${m.id}')" style="padding:5px">`:''}
-              ${m.xxl?`<input type="number" min="0" max="${m.xxl}" placeholder="XXL" class="form-input req-xxl" data-id="${m.id}" oninput="calcReqQty('${m.id}')" style="padding:5px">`:''}
-            </div>` : ''}
-            <input type="number" id="req-qty-${m.id}" min="1" max="${m.qty}" placeholder="Jumlah diambil" class="form-input" ${hasSize?'readonly style="background:#eee"':''}>
+        <div class="req-item-card" id="req-row-${m.id}">
+          <input type="checkbox" class="req-checkbox" onchange="toggleReqItem('${m.id}', this.checked)">
+          ${imgHtml}
+          <div class="req-item-info" onclick="toggleCheckboxFromCard('${m.id}')">
+            <div class="req-item-name">${m.nama}</div>
+            <div class="req-item-stock">Sisa Gudang: ${m.qty} &bull; ${sizeBadges}</div>
+            <div class="req-inputs" id="req-inputs-${m.id}" onclick="event.stopPropagation()">
+              ${hasSize ? `<div style="display:flex;gap:5px;margin-bottom:5px;">
+                ${m.s?`<input type="number" min="0" max="${m.s}" placeholder="S (Max ${m.s})" class="form-input req-s" data-id="${m.id}" oninput="calcReqQty('${m.id}')" style="padding:6px 4px;font-size:12px;text-align:center;">`:''}
+                ${m.m?`<input type="number" min="0" max="${m.m}" placeholder="M (Max ${m.m})" class="form-input req-m" data-id="${m.id}" oninput="calcReqQty('${m.id}')" style="padding:6px 4px;font-size:12px;text-align:center;">`:''}
+                ${m.l?`<input type="number" min="0" max="${m.l}" placeholder="L (Max ${m.l})" class="form-input req-l" data-id="${m.id}" oninput="calcReqQty('${m.id}')" style="padding:6px 4px;font-size:12px;text-align:center;">`:''}
+                ${m.xl?`<input type="number" min="0" max="${m.xl}" placeholder="XL (Max ${m.xl})" class="form-input req-xl" data-id="${m.id}" oninput="calcReqQty('${m.id}')" style="padding:6px 4px;font-size:12px;text-align:center;">`:''}
+                ${m.xxl?`<input type="number" min="0" max="${m.xxl}" placeholder="XXL (Max ${m.xxl})" class="form-input req-xxl" data-id="${m.id}" oninput="calcReqQty('${m.id}')" style="padding:6px 4px;font-size:12px;text-align:center;">`:''}
+              </div>` : ''}
+              <input type="number" id="req-qty-${m.id}" min="1" max="${m.qty}" placeholder="Total yang ingin diambil" class="form-input" ${hasSize?'readonly style="background:#eee;padding:8px"':'style="padding:8px"'}>
+            </div>
           </div>
         </div>`;
     });
-    document.getElementById('request-items-list').innerHTML = html || '<i>Tidak ada barang tersedia.</i>';
-    document.getElementById('modal-overlay').classList.add('active'); document.getElementById('modal-request').classList.add('active');
+    
+    document.getElementById('request-items-list').innerHTML = html || '<div class="empty-state"><h3>KOSONG</h3><p>Tidak ada stok barang di gudang.</p></div>';
+    
+    // Tampilkan Step 1
+    document.getElementById('modal-req-title').textContent = 'Form Request Barang';
+    document.getElementById('req-step-1').style.display = 'block';
+    document.getElementById('req-step-2').style.display = 'none';
+
+    document.getElementById('modal-overlay').classList.add('active'); 
+    document.getElementById('modal-request').classList.add('active');
+  }
+
+  // Bantuan agar klik dimanapun di card akan mencentang checkbox
+  function toggleCheckboxFromCard(id) {
+    const cb = document.querySelector(`#req-row-${id} .req-checkbox`);
+    cb.checked = !cb.checked;
+    toggleReqItem(id, cb.checked);
   }
 
   function toggleReqItem(id, isChecked) {
-    const div = document.getElementById(`req-inputs-${id}`); const row = document.getElementById(`req-row-${id}`);
-    if(isChecked) { div.style.display='block'; row.classList.add('active'); selectedRequestItems[id] = true; }
-    else { div.style.display='none'; row.classList.remove('active'); div.querySelectorAll('input').forEach(i=>i.value=''); delete selectedRequestItems[id]; }
+    const row = document.getElementById(`req-row-${id}`);
+    const cb = row.querySelector('.req-checkbox');
+    cb.checked = isChecked; // sync status
+    if(isChecked) { row.classList.add('active'); selectedRequestItems[id] = true; }
+    else { row.classList.remove('active'); document.querySelectorAll(`#req-inputs-${id} input`).forEach(i=>i.value=''); delete selectedRequestItems[id]; }
   }
 
   function calcReqQty(id) {
@@ -378,42 +492,86 @@
     document.getElementById(`req-qty-${id}`).value = total > 0 ? total : '';
   }
 
-  async function submitRequest() {
-    const keperluan = document.getElementById('req-keperluan').value;
-    if(!keperluan) return showToast('Isi keperluan!', 'error');
+  function previewRequest() {
+    const keperluan = document.getElementById('req-keperluan').value.trim();
+    if(!keperluan) return showToast('Isi keperluan event!', 'error');
     
-    let items = [];
+    finalRequestItems = [];
     for(let id in selectedRequestItems) {
       const m = allMerchandise.find(x => x.id === id);
       const qty = parseInt(document.getElementById(`req-qty-${id}`).value)||0;
-      if(qty <= 0) return showToast(`Jumlah ${m.nama} belum diisi`, 'error');
+      if(qty <= 0) return showToast(`Jumlah request ${m.nama} masih 0`, 'error');
+      
       let data = { id: m.id, nama: m.nama, qty: qty };
       const div = document.getElementById(`req-inputs-${id}`);
       if(div.querySelector('.req-s')) {
-        data.s = parseInt(div.querySelector('.req-s')?.value)||0; data.m = parseInt(div.querySelector('.req-m')?.value)||0; data.l = parseInt(div.querySelector('.req-l')?.value)||0; data.xl = parseInt(div.querySelector('.req-xl')?.value)||0; data.xxl = parseInt(div.querySelector('.req-xxl')?.value)||0;
+        data.s = parseInt(div.querySelector('.req-s')?.value)||0; 
+        data.m = parseInt(div.querySelector('.req-m')?.value)||0; 
+        data.l = parseInt(div.querySelector('.req-l')?.value)||0; 
+        data.xl = parseInt(div.querySelector('.req-xl')?.value)||0; 
+        data.xxl = parseInt(div.querySelector('.req-xxl')?.value)||0;
       }
-      items.push(data);
+      finalRequestItems.push(data);
     }
-    if(items.length === 0) return showToast('Pilih minimal 1 barang', 'error');
+    
+    if(finalRequestItems.length === 0) return showToast('Ceklis minimal 1 barang', 'error');
 
-    document.getElementById('btn-submit-req').textContent = 'Loading...';
-    const res = await apiPost({ action: 'createRequest', user_id: currentUser.id, nama_user: currentUser.nama, no_telp: currentUser.no_telp, keperluan, items });
-    if(res.success) { showToast('Request dikirim!', 'success'); closeModal(); }
-    document.getElementById('btn-submit-req').textContent = 'KIRIM REQUEST';
+    // Buat HTML Preview
+    document.getElementById('prev-keperluan').textContent = keperluan;
+    let html = '';
+    finalRequestItems.forEach(i => {
+      let sizeText = '';
+      if(i.s||i.m||i.l||i.xl||i.xxl) {
+         sizeText = `<br><span style="font-size:11px;color:var(--accent2);">(S:${i.s}, M:${i.m}, L:${i.l}, XL:${i.xl}, XXL:${i.xxl})</span>`;
+      }
+      html += `
+        <div class="preview-item">
+           <div><b>${i.nama}</b>${sizeText}</div>
+           <div style="font-family:var(--font-head); font-weight:800; font-size:16px;">${i.qty} UNIT</div>
+        </div>`;
+    });
+    document.getElementById('prev-items-list').innerHTML = html;
+
+    // Switch ke Step Preview
+    document.getElementById('modal-req-title').textContent = 'Preview Request';
+    document.getElementById('req-step-1').style.display = 'none';
+    document.getElementById('req-step-2').style.display = 'block';
+  }
+
+  function backToStep1() {
+    document.getElementById('modal-req-title').textContent = 'Form Request Barang';
+    document.getElementById('req-step-1').style.display = 'block';
+    document.getElementById('req-step-2').style.display = 'none';
+  }
+
+  async function submitRequest() {
+    const keperluan = document.getElementById('req-keperluan').value;
+    document.getElementById('btn-submit-req').textContent = 'MEMPROSES...';
+    document.getElementById('btn-submit-req').disabled = true;
+
+    const res = await apiPost({ 
+      action: 'createRequest', user_id: currentUser.id, nama_user: currentUser.nama, no_telp: currentUser.no_telp, keperluan, items: finalRequestItems 
+    });
+
+    if(res.success) { showToast('Request berhasil dikirim!', 'success'); closeModal(); } 
+    else { showToast(res.message, 'error'); }
+    
+    document.getElementById('btn-submit-req').textContent = 'KIRIM REQUEST SEKARANG';
+    document.getElementById('btn-submit-req').disabled = false;
   }
 
   // === ADMIN VIEW REQUEST ===
-  async function openAdminReq() { showPage('admin-req'); document.getElementById('request-list-container').innerHTML = 'Loading...'; await loadRequests(); }
+  async function openAdminReq() { showPage('admin-req'); document.getElementById('request-list-container').innerHTML = 'Loading data...'; await loadRequests(); }
   async function loadRequests() {
     const res = await apiGet('getRequests');
     if(res.success) {
       const html = res.data.map(r => {
         let statusBadge = r.status === 'pending' ? '<div class="req-badge badge-pending">PENDING</div>' : r.status === 'approved' ? '<div class="req-badge badge-approved">APPROVED</div>' : '<div class="req-badge badge-rejected">REJECTED</div>';
-        let itemList = r.items.map(i => `<li><b>${i.nama}</b>: ${i.qty} Unit ${i.s||i.m||i.l||i.xl||i.xxl ? `(S:${i.s||0}, M:${i.m||0}, L:${i.l||0}, XL:${i.xl||0}, XXL:${i.xxl||0})`:''}</li>`).join('');
+        let itemList = r.items.map(i => `<li style="padding:4px 0; border-bottom:1px solid #f0f0f0;"><b>${i.nama}</b>: ${i.qty} Unit ${i.s||i.m||i.l||i.xl||i.xxl ? `<br><span style="font-size:12px;color:var(--accent2)">(S:${i.s||0}, M:${i.m||0}, L:${i.l||0}, XL:${i.xl||0}, XXL:${i.xxl||0})</span>`:''}</li>`).join('');
         let btnAction = r.status === 'pending' ? `<div style="margin-top:15px; display:flex; gap:10px;"><button class="btn btn-success" onclick="processReq('${r.id}', 'approved')">APPROVE</button><button class="btn btn-danger" onclick="processReq('${r.id}', 'rejected')">REJECT</button></div>` : '';
-        return `<div class="req-card">${statusBadge}<div style="font-size:13px; color:var(--text-muted); margin-bottom:10px;">${new Date(r.tanggal).toLocaleString('id-ID')}</div><p><b>Oleh:</b> ${r.nama_user} (${r.no_telp})</p><p><b>Keperluan:</b> ${r.keperluan}</p><ul style="margin:10px 0 0 20px; font-size:14px;">${itemList}</ul>${btnAction}</div>`;
+        return `<div class="req-card">${statusBadge}<div style="font-size:13px; color:var(--text-muted); margin-bottom:10px;">${new Date(r.tanggal).toLocaleString('id-ID')}</div><p><b>Oleh:</b> ${r.nama_user} (${r.no_telp})</p><p><b>Keperluan:</b> <span style="font-weight:700;">${r.keperluan}</span></p><ul style="margin:10px 0 0 0; padding:10px; background:var(--bg); border:1px dashed var(--text); list-style:none; font-size:14px;">${itemList}</ul>${btnAction}</div>`;
       }).join('');
-      document.getElementById('request-list-container').innerHTML = html || 'Belum ada request.';
+      document.getElementById('request-list-container').innerHTML = html || '<div class="empty-state"><h3>KOSONG</h3><p>Belum ada request yang masuk.</p></div>';
     }
   }
 
