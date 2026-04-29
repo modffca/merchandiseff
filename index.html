@@ -186,7 +186,7 @@
         <select class="sort-select" id="sort-by" onchange="applyFilters()">
           <option value="newest">TERBARU</option><option value="name-asc">NAMA A–Z</option><option value="name-desc">NAMA Z–A</option><option value="stock-asc">STOK SEDIKIT</option><option value="stock-desc">STOK BANYAK</option>
         </select>
-        </div>
+      </div>
 
       <div class="loading-grid merch-grid" id="loading-state"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
       <div class="merch-grid" id="merch-grid" style="display:none"></div>
@@ -194,6 +194,7 @@
   </div>
 </div>
 
+<!-- ADMIN MODAL (ADD/EDIT) -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
 <div class="modal" id="modal-form">
   <div class="modal-header"><h3 id="modal-title">Tambah Item</h3></div>
@@ -201,6 +202,19 @@
      <input type="hidden" id="form-id">
      <div class="form-group"><label class="form-label">Nama Barang</label><input class="form-input" id="form-nama"></div>
      <div class="form-group"><label class="form-label">Kategori</label><input class="form-input" id="form-jenis" placeholder="Contoh: Baju, Totebag"></div>
+     
+     <!-- FORM INPUT SIZE -->
+     <div class="form-group">
+       <label class="form-label">Detail Size (Opsional)</label>
+       <div style="display: flex; gap: 6px;">
+         <input type="number" class="form-input" id="form-s" placeholder="S" oninput="autoCalculateQty()" style="padding: 10px 4px; text-align: center;">
+         <input type="number" class="form-input" id="form-m" placeholder="M" oninput="autoCalculateQty()" style="padding: 10px 4px; text-align: center;">
+         <input type="number" class="form-input" id="form-l" placeholder="L" oninput="autoCalculateQty()" style="padding: 10px 4px; text-align: center;">
+         <input type="number" class="form-input" id="form-xl" placeholder="XL" oninput="autoCalculateQty()" style="padding: 10px 4px; text-align: center;">
+         <input type="number" class="form-input" id="form-xxl" placeholder="XXL" oninput="autoCalculateQty()" style="padding: 10px 4px; text-align: center;">
+       </div>
+     </div>
+
      <div class="form-group"><label class="form-label">Total Stok</label><input type="number" class="form-input" id="form-qty"></div>
      <div class="form-group"><label class="form-label">Link Foto</label><input class="form-input" id="form-foto" placeholder="Direct link gambar (Opsional)"></div>
      <div class="form-group"><label class="form-label">Catatan Tambahan</label><input class="form-input" id="form-note" placeholder="Opsional"></div>
@@ -386,17 +400,7 @@
     }).join('');
   }
 
- <!-- ADMIN MODAL (ADD/EDIT) -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
-<div class="modal" id="modal-form">
-  <div class="modal-header"><h3 id="modal-title">Tambah Item</h3></div>
-  <div class="modal-body">
-     <input type="hidden" id="form-id">
-     <div class="form-group"><label class="form-label">Nama Barang</label><input class="form-input" id="form-nama"></div>
-     <div class="form-group"><label class="form-label">Kategori</label><input class="form-input" id="form-jenis" placeholder="Contoh: Baju, Totebag"></div>
-     
-     <!-- TAMBAHAN: FORM INPUT SIZE -->
-     // Fungsi Hitung Total Stok Otomatis
+  // --- FUNGSI SIZE & MODAL ---
   function autoCalculateQty() {
     const s = parseInt(document.getElementById('form-s').value) || 0;
     const m = parseInt(document.getElementById('form-m').value) || 0;
@@ -411,7 +415,6 @@
     }
   }
 
-  // MODAL LOGIC (ADD / EDIT)
   function openModal(id = null) {
     document.getElementById('modal-overlay').classList.add('active');
     document.getElementById('modal-form').classList.add('active');
@@ -478,35 +481,7 @@
     
     const action = id ? 'updateMerchandise' : 'createMerchandise';
     try {
-      // Masukkan variabel size ke dalam payload apiPost
       const res = await apiPost({ action, id, nama, jenis, qty, s, m, l, xl, xxl, foto_url, note });
-      if (res.success) {
-        showToast(res.message, 'success'); closeModal(); loadMerchandise();
-      } else { showToast(res.message || 'Gagal menyimpan', 'error'); }
-    } catch(e) { showToast('Gagal terhubung server', 'error'); }
-    btn.disabled = false; btn.textContent = 'SIMPAN';
-  }
-  function closeModal() {
-    document.getElementById('modal-overlay').classList.remove('active');
-    document.getElementById('modal-form').classList.remove('active');
-  }
-
-  async function saveMerch() {
-    const id = document.getElementById('form-id').value;
-    const nama = document.getElementById('form-nama').value.trim();
-    const jenis = document.getElementById('form-jenis').value.trim();
-    const qty = document.getElementById('form-qty').value;
-    const foto_url = document.getElementById('form-foto').value.trim();
-    const note = document.getElementById('form-note').value.trim();
-
-    if (!nama || !jenis) { showToast('Nama dan Kategori wajib diisi!', 'error'); return; }
-
-    const btn = document.getElementById('btn-save-merch');
-    btn.disabled = true; btn.textContent = 'MENYIMPAN...';
-    
-    const action = id ? 'updateMerchandise' : 'createMerchandise';
-    try {
-      const res = await apiPost({ action, id, nama, jenis, qty, foto_url, note });
       if (res.success) {
         showToast(res.message, 'success'); closeModal(); loadMerchandise();
       } else { showToast(res.message || 'Gagal menyimpan', 'error'); }
