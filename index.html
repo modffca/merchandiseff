@@ -386,20 +386,22 @@
     }).join('');
   }
 
-  // MODAL LOGIC (ADD / EDIT)
+ // MODAL LOGIC (ADD / EDIT)
   function openModal(id = null) {
     document.getElementById('modal-overlay').classList.add('active');
     document.getElementById('modal-form').classList.add('active');
     
     if (id) {
       document.getElementById('modal-title').textContent = 'EDIT ITEM';
-      const item = allMerchandise.find(i => i.id === id);
+      // PERBAIKAN: Memaksa ID menjadi string saat dicocokkan agar tidak blank
+      const item = allMerchandise.find(i => String(i.id) === String(id)); 
+      
       document.getElementById('form-id').value = item.id;
       document.getElementById('form-nama').value = item.nama;
       document.getElementById('form-jenis').value = item.jenis;
       document.getElementById('form-qty').value = item.qty;
       document.getElementById('form-foto').value = item.foto_url;
-      document.getElementById('form-note').value = item.raw_note || ''; // Ambil note mentah tanpa tambahan info Size
+      document.getElementById('form-note').value = item.raw_note || ''; 
     } else {
       document.getElementById('modal-title').textContent = 'TAMBAH ITEM';
       document.getElementById('form-id').value = '';
